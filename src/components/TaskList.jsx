@@ -18,6 +18,8 @@ function TaskList() {
   };
 
   const saveTask = () => {
+    debugger;
+    console.log(task);
     addTask(task).then(() => {
     cancelTask(/*complete the cancel task todo*/);
     setTask(...tasks);
@@ -27,7 +29,6 @@ function TaskList() {
   const cancelTask = () => {
     setTask(emptyTask);
     setNewTask(!newTask);
-    setTask(...tasks);
     //todo: reset the task state and hide the form
   };
 
