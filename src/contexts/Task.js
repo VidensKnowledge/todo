@@ -8,6 +8,7 @@ export default TaskContext;
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
 
+
   async function getTasks() {
     await fbGetTasks().then(response => {
       setTasks(response);
@@ -16,12 +17,13 @@ export const TaskProvider = ({ children }) => {
 
   async function addTask(task) {
     await fbAddTask(task).then(response => {
+      setTasks([response, ...tasks]);
       //todo: add the new task you just created to the tasks state
-    });
+    })
   }
 
   async function updateTask(task) {
-    await fbUpdateTask(task).then(() => {
+    await fbUpdateTask(task).then((res) => {
       //todo: update task in the local state taht was updated
     });
   };

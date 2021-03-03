@@ -14,20 +14,32 @@ function TaskList() {
   const updateCompleted = task => {
     task.task.completed = !task.task.completed;
     updateTask(task);
+    setTask(task);
   };
 
   const saveTask = () => {
-    addTask(task).then(() => cancelTask(/*complete the cancel task todo*/))
+    addTask(task).then(() => {
+    cancelTask(/*complete the cancel task todo*/);
+    setTask(...tasks);
+    });
   };
 
   const cancelTask = () => {
+    setTask(emptyTask);
+    setNewTask(!newTask);
+    setTask(...tasks);
     //todo: reset the task state and hide the form
   };
 
   const handleChange = e => {
     const { name, value } = e.target;
+    setTask({...task, [name]: value});
     //todo: update the task state with these variables
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
 
   return (
     <div className="TaskList">
