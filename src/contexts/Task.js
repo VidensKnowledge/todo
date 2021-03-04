@@ -16,10 +16,8 @@ export const TaskProvider = ({ children }) => {
   };
 
   async function addTask(task) {
-      debugger;
     await fbAddTask(task).then(response => {
-      console.log(response);
-      let newTask = {tasks: [...response]};
+      let newTask = {id: response, task: task};
       setTasks([newTask, ...tasks]);
       //todo: add the new task you just created to the tasks state
     })
@@ -27,6 +25,7 @@ export const TaskProvider = ({ children }) => {
 
   async function updateTask(task) {
     await fbUpdateTask(task).then((res) => {
+    setTasks([...tasks, task]);
       //todo: update task in the local state taht was updated
     });
   };
