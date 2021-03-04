@@ -1,8 +1,13 @@
 import React, { useState, useContext } from 'react'
 import TaskContext from '../contexts/Task'
 import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+import Table from 'react-bootstrap/Table'
+import Card from 'react-bootstrap/Card'
+import ButtonGroup from 'antd/lib/button/button-group'
+
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+
 
 function TaskList() {
   const emptyTask = {
@@ -49,7 +54,7 @@ function TaskList() {
   <Container fluid >
       <div className="TaskList">
         <button onClick={() => setNewTask(!newTask)}>+</button>
-        <table>
+        <Table>
         <thead>
 
           <tr>
@@ -86,7 +91,7 @@ function TaskList() {
             ))
           }
         </tbody>
-        </table>
+        </Table>
       </div>
   </Container>
   );

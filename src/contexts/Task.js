@@ -25,7 +25,7 @@ export const TaskProvider = ({ children }) => {
 
   async function updateTask(task) {
     await fbUpdateTask(task).then((res) => {
-    setTasks([...tasks, task]);
+    setTasks(tasks.map(t => t));
       //todo: update task in the local state taht was updated
     });
   };
