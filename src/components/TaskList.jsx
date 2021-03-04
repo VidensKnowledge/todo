@@ -3,10 +3,8 @@ import TaskContext from '../contexts/Task'
 import Container from 'react-bootstrap/Container'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
-import Card from 'react-bootstrap/Card'
-import ButtonGroup from 'antd/lib/button/button-group'
-
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+import styled from 'styled-components'
+import {BiCheckbox, BiCheckboxChecked} from "react-icons/bi"
 
 
 function TaskList() {
@@ -22,8 +20,13 @@ function TaskList() {
   const updateCompleted = task => {
     task.task.completed = !task.task.completed;
     updateTask(task);
-    // setTask(task);
+    boxChecked(task);
   };
+
+  const boxChecked = task => {
+    if (task.completed) {return `<BiCheckboxChecked type="checkbox" checked={task.task.completed} onChange={() => updateCompleted(task)}/>`}
+    else return `<td><BiCheckbox type="checkbox" checked={task.task.completed} onChange={() => updateCompleted(task)}/></td>`;
+  }
 
   const saveTask = () => {
     // debugger;
@@ -50,20 +53,38 @@ function TaskList() {
     e.preventDefault();
   }
 
+  const Table = styled.div`
+    border: 2px solid white;
+    border-spacing: 5px;
+    align-items: center;
+    justify-content: center;
+    margin-top:10%;
+    margin-bottom:25%;
+
+  `;
+
+  const Tr = styled.tr`
+    border: 1px solid white;
+
+
+  `;
+
+
   return (
   <Container fluid >
       <div className="TaskList">
-        <button onClick={() => setNewTask(!newTask)}>+</button>
+        <Button onClick={() => setNewTask(!newTask)}>+</Button>
         <Table>
         <thead>
 
-          <tr>
+          <tr border='1px solid white'>
            <th>Category</th>
             <th>Name</th>
             <th>Completed</th>
           </tr>
 
         </thead>
+
         <tbody>
           {
             newTask && (
@@ -86,6 +107,7 @@ function TaskList() {
               <tr key={task.id}>
                 <td>{task.task.category}</td>
                 <td>{task.task.name}</td>
+                {/* <td>{boxChecked}</td> */}
                 <td><input type="checkbox" checked={task.task.completed} onChange={() => updateCompleted(task)}/></td>
               </tr>
             ))
@@ -96,5 +118,6 @@ function TaskList() {
   </Container>
   );
 }
+
 
 export default TaskList;
